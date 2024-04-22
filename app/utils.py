@@ -13,7 +13,8 @@ def geocode(address):
 def reverse_geocode(latitude, longitude):
     url = f"https://nominatim.openstreetmap.org/reverse?format=json&lat={
         latitude}&lon={longitude}"
-    response = requests.get(url)
+    headers = {'Accept-Language': 'fr'}
+    response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()
         if data and 'address' in data:

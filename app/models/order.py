@@ -5,8 +5,6 @@ class Order(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     
-    panier_id = db.Column(db.Integer, db.ForeignKey('paniers.id'))
-    
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
     product = db.relationship('Product', backref='orders')
     

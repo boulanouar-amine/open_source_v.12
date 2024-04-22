@@ -4,7 +4,6 @@ from datetime import datetime, timedelta
 
 from .models import db
 from .models.customer import Customer
-from .models.panier import Panier
 from .models.product import Product
 from .models.order import Order
 from .models.warehouse import ProductStock,Warehouse
@@ -12,7 +11,7 @@ from .models.warehouse import ProductStock,Warehouse
 from .routes.customer import customer_bp
 from .routes.product import product_bp
 from .routes.order import order_bp
-from .routes.panier import panier_bp 
+
 
 from .routes.routes import main
 
@@ -22,8 +21,7 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
     db.init_app(app)
     
-    app.register_blueprint(customer_bp)
-    app.register_blueprint(panier_bp)
+    app.register_blueprint(customer_bp) 
     app.register_blueprint(product_bp)
     app.register_blueprint(order_bp)
 
