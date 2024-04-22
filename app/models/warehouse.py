@@ -1,24 +1,20 @@
 from . import db
 
-class Product_stock(db.Model):
-    __tablename__ = 'product_stock'
-    
+class Warehouse(db.Model):
+    __tablename__ = 'warehouses'
     id = db.Column(db.Integer, primary_key=True)
-    
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)  # Corrected ForeignKey reference
+    # Define the relationship here, but without using the `back_populates` just yet
+    product_stocks = db.relationship('ProductStock', overlaps="product_stocks")
+
+class ProductStock(db.Model):
+    __tablename__ = 'product_stocks'
+    id = db.Column(db.Integer, primary_key=True)
+    warehouse_id = db.Column(db.Integer, db.ForeignKey('warehouses.id'))
+    warehouse = db.relationship('Warehouse', back_populates='product_stocks')
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
     product = db.relationship(
         'Product', backref=db.backref('stock', lazy='select'))
-    
-    warehouse_id = db.Column(db.Integer, db.ForeignKey('warehouse.id'), nullable=False)  # Link to Warehouse
-    Warehouse = db.relationship('Warehouse', backref=db.backref('product_stock', lazy='select'))  # Link to Warehouse
-    
     quantity = db.Column(db.Integer, nullable=False)
-    
-    
-class Warehouse(db.Model):
-    __tablename__ = 'warehouse'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    product_stock_list = db.relationship("Product_stock", backref="warehouse")
 
-    
+# Now set up back_populates after both classes have been defined
+Warehouse.product_stocks = db.relationship('ProductStock', back_populates='warehouse', overlaps="product_stocks")

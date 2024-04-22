@@ -10,3 +10,4 @@ class Customer(db.Model):
     telephone = db.Column(db.String)
 
     panier = db.relationship('Panier', back_populates='customer', uselist=False)
+    orders = db.relationship('Order', back_populates='customer', overlaps="orders")

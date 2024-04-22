@@ -2,6 +2,10 @@ from flask import Blueprint, render_template, request, redirect, url_for
 from . import db
 from .models.customer import Customer
 from .models.product import Product
+from .models.order import Order
+from datetime import datetime
+
+
 
 main = Blueprint('main', __name__)
 
@@ -28,6 +32,40 @@ def list_products():
 
 
 
+
+@main.route('/add_order', methods=['GET', 'POST'])
+def add_order():
+    if request.method == 'POST':
+        product_id = request.form.get('product_id')
+        quantity = int(request.form.get('quantity'))
+        customer_id = request.form.get('customer_id')
+
+        start_delivery_date = request.form.get('start_delivery_date')
+        end_delivery_date = request.form.get('end_delivery_date')
+
+        # Convert date strings to date objects
+        start_datetime = datetime.strptime(start_delivery_date, '%Y-%m-%dT%H:%M')
+        end_datetime = datetime.strptime(end_delivery_date , '%Y-%m-%dT%H:%M')
+
+        new_order = Order(
+            product_id=product_id,
+            quantity=quantity,
+            customer_id=customer_id,
+  
+            start_delivery_date=start_datetime,
+            end_delivery_date=end_datetime
+        )
+        db.session.add(new_order)
+        db.session.commit()
+        return redirect(url_for('main.home'))
+
+    products = Product.query.all()
+    customers = Customer.query.all()
+    context = {"customers": customers, "products": products}
+    return render_template('add_order.html', **context)
+
+
+
 @main.route('/add_product', methods=['GET', 'POST'])
 def add_product():
     if request.method == 'POST':
@@ -35,9 +73,10 @@ def add_product():
         nom = request.form['nom']
         description = request.form['description']
         price = request.form['price']
+        weight=request.form['weight']
 
         # Create new Product object
-        new_product = Product(nom=nom, description=description, price=price)
+        new_product = Product(nom=nom, description=description, price=price,weight=weight)
 
         # Add to database and commit
         db.session.add(new_product)
