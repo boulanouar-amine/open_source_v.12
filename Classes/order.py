@@ -2,7 +2,7 @@ from datetime import date
 
 class Order:
     
-    def __init__(self,id_customer:int,id_produit:int, quantity:int, start_delivery_date:date,end_delivery_date:date, delivery_adresse:str, total:float):
+    def __init__(self,id_customer:int,id_produit:int, quantity:int, start_delivery_date:date,end_delivery_date:date, delivery_adresse:str, total:float) -> None:
         
         self.id_customer = id_customer
         self.id_produit = id_produit
