@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Add a New Customer</h1>
+<form method="post">
+    <p>
+        <label for="nom">Nom</label>
+        <input type="text" name="nom" placeholder="Nom">
+    </p>
+
+    <p>
+        <label for="prenom">Prenom</label>
+        <input type="text" name="prenom" placeholder="Prenom">
+    </p>
+
+    <p>
+        <label for="adresse">Adresse</label>
+        <input type="text" name="adresse" placeholder="Adresse">
+    </p>
+
+    <p>
+        <label for="telephone">Telephone</label>
+        <input type="text" name="telephone" placeholder="Telephone">
+    </p>
+
+    <p>
+        <button type="submit">Submit</button>
+    </p>
+</form>
+{% endblock %}
