@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+
 {% block content %}
 <h1>Customers</h1>
-<table>
+<table class="table table-striped"> 
     <thead>
         <tr>
             <th>ID</th>
@@ -9,7 +10,7 @@
             <th>Prenom</th>
             <th>Adresse</th>
             <th>Telephone</th>
-            <th>Action</th> <!-- Add a header for the actions column -->
+            <th>Action</th> 
         </tr>
     </thead>
     <tbody>
@@ -21,10 +22,10 @@
             <td>{{ customer.adresse }}</td>
             <td>{{ customer.telephone }}</td>
             <td>
-                <!-- Delete button form -->
-                <form action="{{ url_for('main.delete_customer', customer_id=customer.id) }}" method="POST">
+
+                <form action="{{ url_for('main.delete_customer', customer_id=customer.id) }}" method="POST" style="display:inline;">
                     <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit">Delete</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </td>
         </tr>

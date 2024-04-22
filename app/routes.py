@@ -46,8 +46,6 @@ def list_products():
     return render_template('list_products.html', products=products)
 
 
-
-
 @main.route('/add_order', methods=['GET', 'POST'])
 def add_order():
     if request.method == 'POST':
@@ -78,6 +76,12 @@ def add_order():
     customers = Customer.query.all()
     context = {"customers": customers, "products": products}
     return render_template('add_order.html', **context)
+
+
+@main.route('/orders')
+def list_orders():
+    orders = Order.query.all()
+    return render_template('list_orders.html', orders=orders)
 
 
 
