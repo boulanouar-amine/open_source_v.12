@@ -9,6 +9,7 @@ from .models.product import Product
 from .models.order import Order
 from .models.warehouse import ProductStock,Warehouse
 
+from .panier import panier_bp 
 from .routes import main
 
 
@@ -17,6 +18,8 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
     db.init_app(app)
     
+    
+    # app.register_blueprint(panier_bp)
     
     app.register_blueprint(main)
     
