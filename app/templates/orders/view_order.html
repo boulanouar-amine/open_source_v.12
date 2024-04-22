@@ -1,0 +1,13 @@
+<!-- view_panier.html -->
+{% extends "base.html" %}
+{% block content %}
+<h1>order_weight Details</h1>
+    <p>ID: {{ order.id }}</p>
+    <p>panier ID: {{ order.panier_id }}</p>
+    <p>Product ID: {{ order.product_id }}</p>
+    <p>Customer ID: {{ order.customer_id }}</p>
+    <p>Quantity: {{ order.quantity }}</p>
+    <p>Start Delivery Date: {{ order.start_delivery_date }}</p>
+    <p>End Delivery Date: {{ order.end_delivery_date }}</p>
+    <p>Order Weight: {{ order.order_weight }}</p>
+{% endblock %}

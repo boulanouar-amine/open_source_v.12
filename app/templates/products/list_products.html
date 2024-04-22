@@ -9,6 +9,7 @@
                 <th>Name</th>
                 <th>Description</th>
                 <th>Price</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -17,6 +18,13 @@
                 <td>{{ product.nom }}</td>
                 <td>{{ product.description }}</td>
                 <td>${{ product.price }}</td>
+
+                <td>
+                    <form action="{{ url_for('product.delete_product', id=product.id) }}" method="POST" style="display:inline;">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

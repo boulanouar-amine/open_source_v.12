@@ -12,6 +12,7 @@
                 <th>Quantity</th>
                 <th>Start Delivery Date</th>
                 <th>End Delivery Date</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,14 @@
                 <td>{{ order.quantity }}</td>
                 <td>{{ order.start_delivery_date.strftime('%Y-%m-%d %H:%M') }}</td>
                 <td>{{ order.end_delivery_date.strftime('%Y-%m-%d %H:%M') }}</td>
+
+                <td>
+                    <form action="{{ url_for('order.delete_order', id=order.id) }}" method="POST" style="display:inline;">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+
             </tr>
             {% endfor %}
         </tbody>

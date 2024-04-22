@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, redirect, url_for, render_template
-from . import db
-from .models.panier import Panier
-from .models.customer import Customer
+from .. import db
+from ..models.panier import Panier
+from ..models.customer import Customer
 
 panier_bp = Blueprint('panier', __name__)
 
@@ -37,12 +37,4 @@ def delete_panier(id):
     db.session.commit()
     return redirect(url_for('panier.list_paniers'))
 
-# Optionally, add routes for updating panier details if necessary
-@panier_bp.route('/paniers/update/<int:id>', methods=['POST'])
-def update_panier(id):
-    panier = Panier.query.get_or_404(id)
-    customer_id = request.form.get('customer_id')
-    if customer_id:
-        panier.customer_id = customer_id
-    db.session.commit()
-    return jsonify({'message': 'Panier updated successfully'})
+

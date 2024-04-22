@@ -23,7 +23,7 @@
             <td>{{ customer.telephone }}</td>
             <td>
 
-                <form action="{{ url_for('main.delete_customer', customer_id=customer.id) }}" method="POST" style="display:inline;">
+                <form action="{{ url_for('customer.delete_customer', id=customer.id) }}" method="POST" style="display:inline;">
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
