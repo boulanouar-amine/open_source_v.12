@@ -10,6 +10,12 @@ def home():
     return render_template("base.html", title="Jinja and Flask")
 
 
+@main.route('/customers')
+def list_customers():
+    customers = Customer.query.all()
+    return render_template('list_customers.html', customers=customers)
+
+
 @main.route('/add_customer', methods=['GET', 'POST'])
 def add_customer():
     if request.method == 'POST':
@@ -18,12 +24,6 @@ def add_customer():
         db.session.commit()
         return render_template('customers.html',customers=Customer.query.all())# Redirect to another page after successful submission
     return render_template('add_customer.html')
-
-
-@main.route('/customers')
-def list_products():
-    products = Product.query.all()
-    return render_template('list_customers.html', products=products)
 
 
 
