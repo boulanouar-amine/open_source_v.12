@@ -1,26 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Customers</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Adresse</th>
-                <th>Telephone</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for customer in customers %}
-            <tr>
-                <td>{{ customer.id }}</td>
-                <td>{{ customer.nom }}</td>
-                <td>{{ customer.prenom }}</td>
-                <td>{{ customer.adresse }}</td>
-                <td>{{ customer.telephone }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<h1>Customers</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Adresse</th>
+            <th>Telephone</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for customer in customers %}
+        <tr>
+            <td>{{ customer.id }}</td>
+            <td>{{ customer.nom }}</td>
+            <td>{{ customer.prenom }}</td>
+            <td>{{ customer.adresse }}</td>
+            <td>{{ customer.telephone }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
