@@ -17,3 +17,5 @@ def add_customer():
         db.session.commit()
         return render_template('customers.html',customers=Customer.query.all())# Redirect to another page after successful submission
     return render_template('add_customer.html')
+
+
