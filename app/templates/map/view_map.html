@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+
+<body>
+    <div id="map" style="width: 100%; height: 600px;"></div>
+    <script>
+        var map = L.map('map').setView([50.745, 7.17], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Inject markers data into JavaScript
+        var markers = {{ markers | tojson | safe }};
+
+        // Loop through the markers and add them to the map
+        markers.forEach(function (marker) {
+            L.marker([marker.lat, marker.lng]).addTo(map);
+        });
+    </script>
+</body>
+
+</html>

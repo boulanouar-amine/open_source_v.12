@@ -7,13 +7,10 @@ from .models.customer import Customer
 from .models.product import Product
 from .models.order import Order
 from .models.warehouse import ProductStock,Warehouse
-
 from .routes.customer import customer_bp
 from .routes.product import product_bp
 from .routes.order import order_bp
-
-
-from .routes.routes import main
+from .routes.main import main_bp
 
 
 def create_app():
@@ -23,13 +20,10 @@ def create_app():
     
     app.register_blueprint(customer_bp) 
     app.register_blueprint(product_bp)
-    app.register_blueprint(order_bp)
-
-     
-    app.register_blueprint(main)
+    app.register_blueprint(order_bp)     
+    app.register_blueprint(main_bp)
     
     with app.app_context():
-        from .routes import routes
         db.create_all()
         seed_database() 
         return app
