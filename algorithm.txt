@@ -1,0 +1,26 @@
+function A_star(start, goal)
+    openSet = PriorityQueue()  // Nodes yet to be evaluated
+    openSet.add(start)
+    cameFrom = an empty map  // Most efficient previous step
+
+    gScore = map with default value of Infinity
+    gScore[start] = 0
+
+    fScore = map with default value of Infinity
+    fScore[start] = heuristic(start, goal)
+
+    while openSet is not empty
+        current = openSet.remove()  // Node in openSet having the lowest fScore[] value
+        if current == goal
+            return reconstruct_path(cameFrom, current)
+
+        for each neighbor of current
+            tentative_gScore = gScore[current] + dist_between(current, neighbor)
+            if tentative_gScore < gScore[neighbor]
+                cameFrom[neighbor] = current
+                gScore[neighbor] = tentative_gScore
+                fScore[neighbor] = gScore[neighbor] + heuristic(neighbor, goal)
+                if neighbor not in openSet
+                    openSet.add(neighbor)
+
+    return failure
