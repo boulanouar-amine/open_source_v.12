@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, redirect, url_for, render_template
+from flask import Blueprint, request, redirect, url_for, render_template
 from .. import db
 from ..models.product import Product
 

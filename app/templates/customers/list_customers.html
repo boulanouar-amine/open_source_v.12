@@ -8,7 +8,8 @@
             <th>ID</th>
             <th>Nom</th>
             <th>Prenom</th>
-            <th>Adresse</th>
+            <th>ville</th>
+            <th>rue</th>
             <th>Telephone</th>
             <th>Action</th> 
         </tr>
@@ -19,7 +20,8 @@
             <td>{{ customer.id }}</td>
             <td>{{ customer.nom }}</td>
             <td>{{ customer.prenom }}</td>
-            <td>{{ customer.adresse }}</td>
+            <td>{{ customer.address.city }}</td>
+            <td>{{ customer.address.road }}</td>
             <td>{{ customer.telephone }}</td>
             <td>
 

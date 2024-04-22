@@ -20,7 +20,7 @@
             <tr>
                 <td>{{ order.id }}</td>
                 <td>{{ order.customer.nom }} {{ order.customer.prenom }}</td>
-                <td>{{ order.product.name }}</td>
+                <td>{{ order.product.nom }}</td>
                 <td>{{ order.quantity }}</td>
                 <td>{{ order.start_delivery_date.strftime('%Y-%m-%d %H:%M') }}</td>
                 <td>{{ order.end_delivery_date.strftime('%Y-%m-%d %H:%M') }}</td>

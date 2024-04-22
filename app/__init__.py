@@ -42,14 +42,14 @@ def seed_database():
 
     # Check if the database is empty, and if so, seed it
     if not Customer.query.first():  # Example check
-        customer1 = Customer(id=1,nom='Doe', prenom='John', adresse='1234 Elm St', telephone='123-456-7890')
-        customer2 = Customer(id=2,nom='Smith', prenom='Jane', adresse='5678 Oak St', telephone='987-654-3210')
+        # customer1 = Customer(id=1,nom='Doe', prenom='John', telephone='123-456-7890')
+        # customer2 = Customer(id=2,nom='Smith', prenom='Jane',telephone='987-654-3210')
         
-        product1 = Product(id=1 ,nom='Laptop', price=1200.00,weight=12)
-        product2 = Product(id=2,nom='Phone', price=800.00,weight=123)
+        product1 = Product(nom='Laptop', price=1200.00,weight=12)
+        product2 = Product(nom='Phone', price=800.00,weight=123)
 
         order1 = Order(product_id=1, customer_id=1, quantity=1, start_delivery_date = current_time,end_delivery_date=current_time + timedelta(days=2))
         order2 = Order(product_id=2, customer_id=1, quantity=2, start_delivery_date = current_time,end_delivery_date=current_time + timedelta(days=3))
 
-        db.session.add_all([customer1, customer2, product1, product2, order1, order2])
+        db.session.add_all([ product1, product2, order1, order2])
         db.session.commit()    

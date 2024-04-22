@@ -6,9 +6,9 @@ class Customer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String)
     prenom = db.Column(db.String)
-    adresse = db.Column(db.String)
-    latitude = db.Column(db.Float)
-    longitude = db.Column(db.Float)
+    address = db.relationship(
+        'Address', back_populates='customer', uselist=False)
+
     telephone = db.Column(db.String)
 
     panier = db.relationship('Panier', back_populates='customer', uselist=False)

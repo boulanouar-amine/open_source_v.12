@@ -18,5 +18,5 @@ def reverse_geocode(latitude, longitude):
         data = response.json()
         if data and 'address' in data:
             # Return the address part of the response
-            return str(data['address'])
+            return data['address']
     return None
