@@ -20,11 +20,26 @@ def add_customer():
     return render_template('add_customer.html')
 
 
+@main.route('/customers')
+def list_products():
+    products = Product.query.all()
+    return render_template('list_customers.html', products=products)
+
+
+
+
+@main.route('/delete_customer/<int:customer_id>', methods=['POST'])
+def delete_customer(customer_id):
+    customer = Customer.query.get_or_404(customer_id)
+    db.session.delete(customer)
+    db.session.commit()
+    return redirect(url_for('customers'))
+
+
 @main.route('/products')
 def list_products():
     products = Product.query.all()
     return render_template('list_products.html', products=products)
-
 
 
 
