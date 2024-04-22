@@ -9,6 +9,7 @@
             <th>Prenom</th>
             <th>Adresse</th>
             <th>Telephone</th>
+            <th>Action</th> <!-- Add a header for the actions column -->
         </tr>
     </thead>
     <tbody>
@@ -19,6 +20,13 @@
             <td>{{ customer.prenom }}</td>
             <td>{{ customer.adresse }}</td>
             <td>{{ customer.telephone }}</td>
+            <td>
+                <!-- Delete button form -->
+                <form action="{{ url_for('main.delete_customer', customer_id=customer.id) }}" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
         </tr>
         {% endfor %}
     </tbody>
