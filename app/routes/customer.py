@@ -26,20 +26,22 @@ def create_customer():
         longitude = request.form.get('longitude', default_longitude)
 
         address_data = reverse_geocode(latitude, longitude)
-
-        # Now that new_customer has an ID, create the Address instance.
-        address = Address(latitude=latitude, longitude=longitude,
-                           road = address_data.get('road', ''),
-                           quarter=address_data.get('quarter', ''),
-                           city=address_data.get('city', ''),
-                           county=address_data.get('county', ''),
-                           state_district=address_data.get('state_district', ''),
-                           region=address_data.get('region', ''),
-                           postcode=address_data.get('postcode', ''),
-                           country=address_data.get('country', ''),
-                           country_code=address_data.get('country_code', ''),
-                           customer_id=new_customer.id)
-
+        if address_data is not None:
+            # Now that new_customer has an ID, create the Address instance.
+            address = Address(latitude=latitude, longitude=longitude,
+                            road = address_data.get('road', ''),
+                            quarter=address_data.get('quarter', ''),
+                            city=address_data.get('city', ''),
+                            county=address_data.get('county', ''),
+                            state_district=address_data.get('state_district', ''),
+                            region=address_data.get('region', ''),
+                            postcode=address_data.get('postcode', ''),
+                            country=address_data.get('country', ''),
+                            country_code=address_data.get('country_code', ''),
+                            customer_id=new_customer.id)
+        else:
+            return jsonify({'error': 'Invalid coordinates'}), 400
+        
         db.session.add(address)
         db.session.commit()  
 

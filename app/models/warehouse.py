@@ -3,9 +3,11 @@ from . import db
 class Warehouse(db.Model):
     __tablename__ = 'warehouses'
     id = db.Column(db.Integer, primary_key=True)
-    # Define the relationship here, but without using the `back_populates` just yet
+    nom = db.Column(db.String(128), nullable=False)
+    address_id = db.Column(db.Integer, db.ForeignKey('address.id')) 
+    address = db.relationship('Address', backref='warehouses', uselist=False)
     product_stocks = db.relationship('ProductStock', overlaps="product_stocks")
-
+   
 class ProductStock(db.Model):
     __tablename__ = 'product_stocks'
     id = db.Column(db.Integer, primary_key=True)
