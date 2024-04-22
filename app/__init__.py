@@ -1,6 +1,13 @@
 
 from flask import Flask
 from .models import db
+
+from .models.customer import Customer
+from .models.panier import Panier
+from .models.product import Product
+from .models.order import Order
+from .models.warehouse import Product_stock,Warehouse
+
 from .routes import main
 
 

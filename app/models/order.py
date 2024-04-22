@@ -4,7 +4,7 @@ class Order(db.Model):
     __tablename__ = 'orders'
 
     id = db.Column(db.Integer, primary_key=True)
-    panier_id = db.Column(db.Integer, db.ForeignKey('paniers.id')) 
+    panier_id = db.Column(db.Integer, db.ForeignKey('paniers.id'))
     id_customer = db.Column(db.Integer, nullable=False)
     id_produit = db.Column(db.Integer, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
