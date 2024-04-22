@@ -7,8 +7,7 @@ main = Blueprint('main', __name__)
 
 @main.route("/")
 def home():
-    return render_template("base.html", title="Jinja and Flask")
-
+    return render_template("base.html", title="Home")
 
 @main.route('/customers')
 def list_customers():
@@ -19,22 +18,23 @@ def list_customers():
 @main.route('/add_customer', methods=['GET', 'POST'])
 def add_customer():
     if request.method == 'POST':
-        new_customer = Customer(nom=request.form['nom'], prenom=request.form['prenom'], adresse=request.form['adresse'], telephone=request.form['telephone'])
+        new_customer = Customer(nom=request.form['nom'], prenom=request.form['prenom'],
+                                adresse=request.form['adresse'], telephone=request.form['telephone'])
         db.session.add(new_customer)
         db.session.commit()
-        return render_template('customers.html',customers=Customer.query.all())# Redirect to another page after successful submission
+        return redirect(url_for('main.list_customers')) 
     return render_template('add_customer.html')
-
-
 
 
 @main.route('/delete_customer/<int:customer_id>', methods=['POST'])
 def delete_customer(customer_id):
-    customer = Customer.query.get_or_404(customer_id)
-    db.session.delete(customer)
+    # Find the customer by ID
+    customer_to_delete = Customer.query.get_or_404(customer_id)
+    # Delete the customer from the database
+    db.session.delete(customer_to_delete)
     db.session.commit()
-    return redirect(url_for('customers'))
-
+    # Redirect to the list of customers, or another appropriate page
+    return redirect(url_for('main.list_customers'))
 
 @main.route('/products')
 def list_products():
