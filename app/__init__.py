@@ -13,7 +13,7 @@ from .routes.customer import customer_bp
 from .routes.product import product_bp
 from .routes.order import order_bp
 from .routes.panier import panier_bp 
-from .routes.map import map_bp
+
 from .routes.routes import main
 
 
@@ -26,10 +26,8 @@ def create_app():
     app.register_blueprint(panier_bp)
     app.register_blueprint(product_bp)
     app.register_blueprint(order_bp)
-    app.register_blueprint(map_bp)
-      
-    
-    
+
+     
     app.register_blueprint(main)
     
     with app.app_context():
