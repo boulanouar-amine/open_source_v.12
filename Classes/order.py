@@ -9,4 +9,3 @@ class Order:
         self.quantity = quantity
         self.start_delivery_date = start_delivery_date # the start date of the preferred delivery date
         self.end_delivery_date = end_delivery_date  # the end date of the preferred delivery date
-     
