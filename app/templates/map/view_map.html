@@ -1,28 +1,60 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Map</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <style>
+        #map {
+            width: 100%;
+            height: 600px; /* Adjust the height as needed */
+        }
+        .custom-fa-icon {
+            font-size: 24px; /* Icon size */
+            text-align: center;
+            line-height: 24px; /* Align icon center vertically */
+        }
+    </style>
+</head>
 <body>
-    <div id="map" style="width: 100%; height: 600px;"></div>
+    <div id="map"></div>
     <script>
-        var map = L.map('map').setView([50.745, 7.17], 13);
+        var map = L.map('map').setView([{{ markers[0].lat }}, {{ markers[0].lng }}], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Inject markers data into JavaScript
         var markers = {{ markers | tojson | safe }};
 
-        // Loop through the markers and add them to the map
-        markers.forEach(function (marker) {
-            L.marker([marker.lat, marker.lng]).addTo(map);
+        markers.forEach(function(marker) {
+            var iconHtml;
+            switch (marker.type) {
+                case 'source':
+                    iconHtml = '<div class="custom-fa-icon"><i class="fas fa-star" style="color: red;"></i></div>';
+                    break;
+                case 'destination':
+                    iconHtml = '<div class="custom-fa-icon"><i class="fas fa-map-marker-alt" style="color: blue;"></i></div>';
+                    break;
+                case 'node':
+                    iconHtml = '<div class="custom-fa-icon"><i class="fas fa-circle" style="color: green;"></i></div>';
+                    break;
+                default:
+                    iconHtml = '<div class="custom-fa-icon"><i class="fas fa-dot-circle" style="color: black;"></i></div>';
+            }
+
+            var customIcon = L.divIcon({
+                className: '', // No extra class
+                html: iconHtml,
+                iconSize: [30, 30], // Size of the icon
+                iconAnchor: [15, 15] // Point of the icon which will correspond to marker's location
+            });
+
+            L.marker([marker.lat, marker.lng], { icon: customIcon }).addTo(map).bindPopup(marker.label);
         });
     </script>
 </body>
-
 </html>
