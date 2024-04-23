@@ -59,7 +59,7 @@ def create_customer():
             # Adjust the query to use a bounding box
             query = f"""
                 [out:json];
-                 node["highway"]
+                 node
                 ({min(source_latitude, latitude)},{min(source_longitude, longitude)},
                  {max(source_latitude, latitude)},{max(source_longitude, longitude)});
                 out body;
@@ -68,24 +68,14 @@ def create_customer():
             print(result.nodes)
             print(query)
             for element in result.nodes:
-                print(element.lat)
-                node_address = reverse_geocode(element.lat, element.lon)
-                if node_address:
-                    address_instance = Address(latitude=latitude, longitude=longitude,
-                            road = address_data.get('road', ''),
-                            quarter=address_data.get('quarter', ''),
-                            city=address_data.get('city', ''),
-                            county=address_data.get('county', ''),
-                            state_district=address_data.get('state_district', ''),
-                            region=address_data.get('region', ''),
-                            postcode=address_data.get('postcode', ''),
-                            country=address_data.get('country', ''),
-                            country_code=address_data.get('country_code', ''),
+
+                address_instance = Address(latitude=element.lat, longitude=element.lon,
                             customer_id=new_customer.id
                             )
                     
-                    db.session.add(address_instance)
-                    db.session.commit()
+                db.session.add(address_instance)
+           
+            db.session.commit()
             
 
         return redirect(url_for('customer.list_customers'))
