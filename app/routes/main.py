@@ -24,6 +24,6 @@ def home():
     for node in result.nodes:
         markers.append({'lat': node.lat, 'lng': node.lon})
 
-    print(len(markers))
+    # print(len(markers))
     # Render the map with LeafletJS
     return render_template('map/view_map.html', markers=markers)
