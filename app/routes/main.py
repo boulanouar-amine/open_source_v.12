@@ -6,8 +6,14 @@ import overpy
 
 main_bp = Blueprint('main', __name__)
 
+
+@main_bp.route("/")
+def index():
+    return render_template("index.html")
+
+
 @main_bp.route("/customers/map/<int:id>")
-def home(id):
+def map(id):
     # Fetch customer's address based on customer ID
     customer_address = Address.query.filter_by(customer_id=id, is_destination=True).first()
     if not customer_address:
