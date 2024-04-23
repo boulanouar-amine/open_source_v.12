@@ -3,7 +3,7 @@ from flask import Blueprint, request, jsonify, redirect, url_for, render_templat
 from .. import db
 from ..models.customer import Customer
 from ..models.address import Address
-from ..utils import  reverse_geocode
+from ..utils import reverse_geocode
 
 
 customer_bp = Blueprint('customer', __name__)
